@@ -29,7 +29,7 @@ const PlusCode = z.object({
   global_code: z.string(),
 });
 
-export const RestaurantResult = z.object({
+export const Restaurant = z.object({
   business_status: z.string().optional(),
   formatted_address: z.string().optional(),
   geometry: Geometry.optional(),
@@ -47,6 +47,7 @@ export const RestaurantResult = z.object({
   types: z.string().array().optional(),
   user_ratings_total: z.number().optional(),
 });
-export const RestaurantResults = z.array(RestaurantResult);
+export const RestaurantResults = z.array(Restaurant);
 
+export type Restaurant = z.infer<typeof Restaurant>;
 export type RestaurantResults = z.infer<typeof RestaurantResults>;

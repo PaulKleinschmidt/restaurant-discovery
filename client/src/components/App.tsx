@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { searchRestaurants } from '../api/searchRestaurants';
 import { RestaurantResults } from '../api/types';
+import { SearchBar } from './SearchBar';
+import { RestaurantItem } from './RestaurantItem';
 
 function App() {
-  const [loading, setLoading] = React.useState<boolean>(true);
-  const [restaurants, setRestaurants] = React.useState<RestaurantResults>([]);
-  const [error, setError] = React.useState<Error | undefined>(undefined);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [restaurants, setRestaurants] = useState<RestaurantResults>([]);
+  const [error, setError] = useState<Error | undefined>(undefined);
 
   const onSearch = async (query: string) => {
     setLoading(true);
@@ -18,19 +20,20 @@ function App() {
     onSearch('Thai');
   }, []);
 
-  if (loading) {
-    return <div>loading...</div>;
-  }
-
   if (error) {
     return <div>Error! {error.message}</div>;
   }
 
   return (
     <div className="App">
-      {restaurants.map((r) => (
-        <div>{r.name}</div>
-      ))}
+      <SearchBar onSearch={onSearch} />
+
+      {loading && <div>loading...</div>}
+
+      {!loading &&
+        restaurants.map((restaurant) => (
+          <RestaurantItem key={restaurant.place_id} restaurant={restaurant} />
+        ))}
     </div>
   );
 }
