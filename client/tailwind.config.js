@@ -1,10 +1,14 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require('tailwindcss/colors');
+
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     colors: {
+      transparent: colors.transparent,
       gray: '#EFEFEC',
       white: '#FFFFFF',
+      green: '#2C5601',
     },
     extend: {
       boxShadow: {

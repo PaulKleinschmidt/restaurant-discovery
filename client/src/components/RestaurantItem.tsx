@@ -3,17 +3,30 @@ import { default as star } from '../assets/star.svg';
 import { default as bookmarkResting } from '../assets/bookmark-resting.svg';
 import { default as bookmarkSaved } from '../assets/bookmark-saved.svg';
 import { default as placeholderImage } from '../assets/placeholder-image.png';
+import { useContext } from 'react';
+import { RestaurantContext } from '../context/RestaurantContext';
+import cx from 'classnames';
 
 type Props = {
   restaurant: Restaurant;
 };
 
 export const RestaurantItem = ({ restaurant }: Props) => {
+  const { setSelectedRestaurant, selectedRestaurant } =
+    useContext(RestaurantContext);
+
   return (
-    <div className="text-left text-base shadow-md rounded-2xl my-6 bg-white p-4 m-6 flex">
+    <div
+      onClick={() => setSelectedRestaurant(restaurant)}
+      className={cx(
+        'text-left text-base shadow-md rounded-2xl my-6 bg-white p-4 m-6 flex cursor-pointer border-2 border-transparent',
+        selectedRestaurant?.place_id === restaurant.place_id &&
+          'border-green box-content'
+      )}
+    >
       <img
         src={'data:image/png;base64,' + restaurant.image}
-        className="w-16 h-[72px] object-cover"
+        className="w-16 h-[72px] object-cover border-c"
         alt={placeholderImage}
       />
 
