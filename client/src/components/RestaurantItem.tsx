@@ -9,9 +9,10 @@ import cx from 'classnames';
 
 type Props = {
   restaurant: Restaurant;
+  hideBorder?: boolean;
 };
 
-export const RestaurantItem = ({ restaurant }: Props) => {
+export const RestaurantItem = ({ restaurant, hideBorder }: Props) => {
   const { setSelectedRestaurant, selectedRestaurant } =
     useContext(RestaurantContext);
 
@@ -21,6 +22,7 @@ export const RestaurantItem = ({ restaurant }: Props) => {
       className={cx(
         'text-left text-base shadow-md rounded-2xl my-6 bg-white p-4 m-6 flex cursor-pointer border-2 border-transparent',
         selectedRestaurant?.place_id === restaurant.place_id &&
+          !hideBorder &&
           'border-green box-content'
       )}
     >

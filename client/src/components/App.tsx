@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { ChangeEvent, useEffect, useState } from 'react';
 import './App.css';
 import { searchRestaurants } from '../api/searchRestaurants';
 import { Restaurant, RestaurantResults } from '../api/types';
@@ -6,6 +6,7 @@ import { Header } from './Header';
 import { RestaurantItem } from './RestaurantItem';
 import { Map } from './Map';
 import { RestaurantContext } from '../context/RestaurantContext';
+import debounce from 'lodash.debounce';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -17,12 +18,14 @@ function App() {
     useState<Restaurant | null>(null);
 
   const onSearch = async (query: string) => {
-    setLoading(true);
     await searchRestaurants(query).then(setRestaurants).catch(setError);
     setLoading(false);
   };
 
+  const debounceSearch = debounce((query: string) => onSearch(query), 500);
+
   useEffect(() => {
+    setLoading(true);
     onSearch('');
   }, []);
 
@@ -34,10 +37,14 @@ function App() {
     <RestaurantContext.Provider
       value={{ selectedRestaurant, setSelectedRestaurant }}
     >
-      <div className="App bg-gray h-screen">
-        <Header onSearch={onSearch} />
-
-        {loading && !restaurants && <div>Loading...</div>}
+      <div className="App bg-gray h-screen font-manrope">
+        <Header
+          loading={loading}
+          onSearch={(query) => {
+            setLoading(true);
+            debounceSearch(query);
+          }}
+        />
 
         {restaurants && (
           <div className="flex">

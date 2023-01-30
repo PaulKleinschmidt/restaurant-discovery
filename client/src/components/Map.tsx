@@ -35,7 +35,14 @@ export const Map = ({ restaurants }: Props) => {
           const lng = restaurant.geometry?.location.lng;
           return (
             lat &&
-            lng && <MapLocation lat={lat} lng={lng} restaurant={restaurant} />
+            lng && (
+              <MapLocation
+                key={restaurant.place_id}
+                lat={lat}
+                lng={lng}
+                restaurant={restaurant}
+              />
+            )
           );
         })}
       </GoogleMapReact>

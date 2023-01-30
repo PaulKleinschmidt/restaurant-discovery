@@ -24,8 +24,8 @@ export const MapLocation = ({ restaurant }: Props) => {
         alt="pin-resting"
       />
       {isSelected && (
-        <div className="w-[327px]">
-          <RestaurantItem restaurant={restaurant} />
+        <div className="w-96">
+          <RestaurantItem restaurant={restaurant} hideBorder />
         </div>
       )}
     </div>

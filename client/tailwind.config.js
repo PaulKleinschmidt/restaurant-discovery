@@ -17,6 +17,9 @@ module.exports = {
       borderRadius: {
         '4xl': '2.5rem',
       },
+      fontFamily: {
+        manrope: ['Manrope', 'sans-serif'],
+      },
     },
   },
   plugins: [],
