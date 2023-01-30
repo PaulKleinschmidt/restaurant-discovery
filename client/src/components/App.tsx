@@ -25,15 +25,17 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App bg-gray">
       <SearchBar onSearch={onSearch} />
 
       {loading && <div>loading...</div>}
 
-      {!loading &&
-        restaurants.map((restaurant) => (
-          <RestaurantItem key={restaurant.place_id} restaurant={restaurant} />
-        ))}
+      <div className="w-4/12">
+        {!loading &&
+          restaurants.map((restaurant) => (
+            <RestaurantItem key={restaurant.place_id} restaurant={restaurant} />
+          ))}
+      </div>
     </div>
   );
 }
