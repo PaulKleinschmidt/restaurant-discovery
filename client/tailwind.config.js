@@ -4,11 +4,16 @@ const colors = require('tailwindcss/colors');
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
+    fontSize: {
+      sm: '0.8125rem',
+    },
     colors: {
       transparent: colors.transparent,
       gray: '#EFEFEC',
       white: '#FFFFFF',
       green: '#2C5601',
+      textPrimary: '#2B381F',
+      textSecondary: '#656E5E',
     },
     extend: {
       boxShadow: {

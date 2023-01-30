@@ -16,32 +16,34 @@ export const RestaurantItem = ({ restaurant, hideBorder }: Props) => {
   const { setSelectedRestaurant, selectedRestaurant } =
     useContext(RestaurantContext);
 
+  const imageSrc = restaurant.image
+    ? 'data:image/png;base64,' + restaurant.image
+    : placeholderImage;
   return (
     <div
       onClick={() => setSelectedRestaurant(restaurant)}
       className={cx(
-        'text-left text-base shadow-md rounded-2xl my-6 bg-white p-4 m-6 flex cursor-pointer border-2 border-transparent',
+        'text-left text-base shadow-md rounded-2xl my-6 bg-white p-4 m-6 flex cursor-pointer border-2 border-transparent text-textSecondary',
         selectedRestaurant?.place_id === restaurant.place_id &&
           !hideBorder &&
           'border-green box-content'
       )}
     >
       <img
-        src={'data:image/png;base64,' + restaurant.image}
+        src={imageSrc}
         className="w-16 h-[72px] object-cover border-c"
-        alt={placeholderImage}
+        alt="Restaurant image"
       />
-
       <div className="ml-3 w-full">
-        <div className="font-bold flex justify-between mb-1">
+        <div className="flex justify-between mb-1 text-textPrimary">
           {restaurant.name} <img src={bookmarkResting} alt="favorite" />
         </div>
-        <div className="flex mb-1">
+        <div className="flex mb-1 text-sm">
           <img src={star} alt="star" className="mr-1" />
-          {restaurant.rating} • {restaurant.user_ratings_total}
+          <span className="text-textPrimary">{restaurant.rating} • </span>(
+          {restaurant.user_ratings_total})
         </div>
-
-        <div>{restaurant.formatted_address}</div>
+        <div className="text-sm">{restaurant.formatted_address}</div>
       </div>
     </div>
   );

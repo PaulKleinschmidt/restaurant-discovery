@@ -30,22 +30,24 @@ const PlusCode = z.object({
 });
 
 export const Restaurant = z.object({
+  // Required
+  place_id: z.string(),
+  geometry: Geometry,
+  user_ratings_total: z.number(),
+  name: z.string(),
+  rating: z.number(),
+  // Optional
   business_status: z.string().optional(),
   formatted_address: z.string().optional(),
-  geometry: Geometry.optional(),
   icon: z.string().url().optional(),
   icon_background_color: z.string().optional(),
   icon_mask_base_uri: z.string().url().optional(),
-  name: z.string().optional(),
   opening_hours: OpeningHours.optional(),
   photos: z.array(Photo).optional(),
-  place_id: z.string().optional(),
   plus_code: PlusCode.optional(),
   price_level: z.number().optional(),
-  rating: z.number().optional(),
   reference: z.string().optional(),
   types: z.string().array().optional(),
-  user_ratings_total: z.number().optional(),
   image: z.string().optional(),
 });
 export const RestaurantResults = z.array(Restaurant);

@@ -7,6 +7,8 @@ import { RestaurantItem } from './RestaurantItem';
 import { Map } from './Map';
 import { RestaurantContext } from '../context/RestaurantContext';
 import debounce from 'lodash.debounce';
+import { ErrorBoundary } from 'react-error-boundary';
+import { ErrorFallback } from './ErrorFallback';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -30,39 +32,41 @@ function App() {
   }, []);
 
   if (error) {
-    return <div>Error! {error.message}</div>;
+    return <ErrorFallback error={error} />;
   }
 
   return (
-    <RestaurantContext.Provider
-      value={{ selectedRestaurant, setSelectedRestaurant }}
-    >
-      <div className="App bg-gray h-screen font-manrope">
-        <Header
-          loading={loading}
-          onSearch={(query) => {
-            setLoading(true);
-            debounceSearch(query);
-          }}
-        />
+    <ErrorBoundary FallbackComponent={ErrorFallback}>
+      <RestaurantContext.Provider
+        value={{ selectedRestaurant, setSelectedRestaurant }}
+      >
+        <div className="App bg-gray h-screen font-manrope">
+          <Header
+            loading={loading}
+            onSearch={(query) => {
+              setLoading(true);
+              debounceSearch(query);
+            }}
+          />
 
-        {restaurants && (
-          <div className="flex">
-            <div className="w-4/12 overflow-auto h-[calc(100vh-64px)] bg-gray">
-              {restaurants.map((restaurant) => (
-                <RestaurantItem
-                  key={restaurant.place_id}
-                  restaurant={restaurant}
-                />
-              ))}
+          {restaurants && (
+            <div className="flex">
+              <div className="w-4/12 overflow-auto h-[calc(100vh-64px)] bg-gray">
+                {restaurants.map((restaurant) => (
+                  <RestaurantItem
+                    key={restaurant.place_id}
+                    restaurant={restaurant}
+                  />
+                ))}
+              </div>
+              <div className="w-full">
+                <Map restaurants={restaurants} />
+              </div>
             </div>
-            <div className="w-full">
-              <Map restaurants={restaurants} />
-            </div>
-          </div>
-        )}
-      </div>
-    </RestaurantContext.Provider>
+          )}
+        </div>
+      </RestaurantContext.Provider>
+    </ErrorBoundary>
   );
 }
 
