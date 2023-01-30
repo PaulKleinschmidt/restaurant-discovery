@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import { searchRestaurants } from '../api/searchRestaurants';
 import { RestaurantResults } from '../api/types';
-import { SearchBar } from './SearchBar';
+import { Header } from './Header';
 import { RestaurantItem } from './RestaurantItem';
 
 function App() {
@@ -26,7 +26,7 @@ function App() {
 
   return (
     <div className="App bg-gray">
-      <SearchBar onSearch={onSearch} />
+      <Header onSearch={onSearch} />
 
       {loading && <div>loading...</div>}
 
