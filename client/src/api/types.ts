@@ -46,6 +46,7 @@ export const Restaurant = z.object({
   reference: z.string().optional(),
   types: z.string().array().optional(),
   user_ratings_total: z.number().optional(),
+  image: z.string().optional(),
 });
 export const RestaurantResults = z.array(Restaurant);
 

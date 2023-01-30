@@ -8,7 +8,7 @@ type Props = {
 export const SearchBar = ({ onSearch }: Props) => {
   const debounceSearch = debounce(
     (e: ChangeEvent<HTMLInputElement>) => onSearch(e.target.value),
-    200
+    500
   );
   return <input onChange={debounceSearch} />;
 };
