@@ -36,9 +36,9 @@ export const Restaurant = z.object({
   user_ratings_total: z.number(),
   name: z.string(),
   rating: z.number(),
+  formatted_address: z.string(),
   // Optional
   business_status: z.string().optional(),
-  formatted_address: z.string().optional(),
   icon: z.string().url().optional(),
   icon_background_color: z.string().optional(),
   icon_mask_base_uri: z.string().url().optional(),

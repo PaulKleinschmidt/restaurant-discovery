@@ -16,17 +16,21 @@ export const RestaurantItem = ({ restaurant, hideBorder }: Props) => {
   const { setSelectedRestaurant, selectedRestaurant } =
     useContext(RestaurantContext);
 
+  const isSelectedRestaurant =
+    selectedRestaurant?.place_id === restaurant.place_id;
+
   const imageSrc = restaurant.image
     ? 'data:image/png;base64,' + restaurant.image
     : placeholderImage;
+
   return (
     <div
       onClick={() => setSelectedRestaurant(restaurant)}
       className={cx(
-        'text-left text-base shadow-md rounded-2xl my-6 bg-white p-4 m-6 flex cursor-pointer border-2 border-transparent text-textSecondary',
-        selectedRestaurant?.place_id === restaurant.place_id &&
-          !hideBorder &&
-          'border-green box-content'
+        'text-left text-base shadow-md rounded-2xl my-6 bg-white p-4 m-6 flex cursor-pointer  text-textSecondary',
+        isSelectedRestaurant && !hideBorder
+          ? 'border-green border-2'
+          : 'border-transparent border-2'
       )}
     >
       <img

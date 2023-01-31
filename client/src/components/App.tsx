@@ -6,7 +6,6 @@ import { Header } from './Header';
 import { RestaurantItem } from './RestaurantItem';
 import { Map } from './Map';
 import { RestaurantContext } from '../context/RestaurantContext';
-import debounce from 'lodash.debounce';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ErrorFallback } from './ErrorFallback';
 
@@ -18,18 +17,17 @@ function App() {
   const [error, setError] = useState<Error | null>(null);
   const [selectedRestaurant, setSelectedRestaurant] =
     useState<Restaurant | null>(null);
-
-  const onSearch = async (query: string) => {
-    await searchRestaurants(query).then(setRestaurants).catch(setError);
-    setLoading(false);
-  };
-
-  const debounceSearch = debounce((query: string) => onSearch(query), 500);
+  const [searchTerm, setSearchTerm] = useState<string>('');
 
   useEffect(() => {
     setLoading(true);
-    onSearch('');
-  }, []);
+    const timer = setTimeout(async () => {
+      await searchRestaurants(searchTerm).then(setRestaurants).catch(setError);
+      setLoading(false);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, [searchTerm]);
 
   if (error) {
     return <ErrorFallback error={error} />;
@@ -44,8 +42,9 @@ function App() {
           <Header
             loading={loading}
             onSearch={(query) => {
-              setLoading(true);
-              debounceSearch(query);
+              // setLoading(true);
+              setSearchTerm(query);
+              // debounceSearch();
             }}
           />
 

@@ -22,9 +22,20 @@ export const MapLocation = ({ restaurant }: Props) => {
         onClick={() => setSelectedRestaurant(restaurant)}
         src={isSelected ? pinSelected : pinResting}
         alt="pin-resting"
+        style={{
+          position: 'absolute',
+          transform: 'translateZ(0) translate(-50%, -50%)',
+          backfaceVisibility: 'hidden',
+        }}
       />
       {isSelected && (
-        <div className="w-96">
+        <div
+          className="w-96 z-10"
+          style={{
+            position: 'absolute',
+            backfaceVisibility: 'hidden',
+          }}
+        >
           <RestaurantItem restaurant={restaurant} hideBorder />
         </div>
       )}
