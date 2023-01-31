@@ -4,7 +4,6 @@ import { default as pinSelected } from '../assets/pin-selected.svg';
 import { RestaurantItem } from './RestaurantItem';
 import { useContext } from 'react';
 import { RestaurantContext } from '../context/RestaurantContext';
-import cx from 'classnames';
 
 type Props = {
   lat: number;

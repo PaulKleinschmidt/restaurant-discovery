@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import { searchRestaurants } from '../api/searchRestaurants';
 import { Restaurant, RestaurantResults } from '../api/types';
@@ -8,6 +8,8 @@ import { Map } from './Map';
 import { RestaurantContext } from '../context/RestaurantContext';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ErrorFallback } from './ErrorFallback';
+import { ViewTypes } from '../types/ViewTypes';
+import cx from 'classnames';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -18,6 +20,7 @@ function App() {
   const [selectedRestaurant, setSelectedRestaurant] =
     useState<Restaurant | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
+  const [view, setView] = useState<ViewTypes>(ViewTypes.List);
 
   useEffect(() => {
     setLoading(true);
@@ -42,8 +45,15 @@ function App() {
           <Header loading={loading} onSearch={setSearchTerm} />
 
           {restaurants && (
-            <div className="flex">
-              <div className="w-4/12 overflow-auto h-[calc(100vh-64px)] bg-gray">
+            <div className="w-screen flex h-[calc(100vh-64px)]">
+              <div
+                className={cx(
+                  view === ViewTypes.Map
+                    ? 'w-full md:w-4/12'
+                    : 'hidden md:w-4/12 md:block',
+                  'overflow-auto h-full bg-gray'
+                )}
+              >
                 {restaurants.map((restaurant) => (
                   <RestaurantItem
                     key={restaurant.place_id}
@@ -51,6 +61,7 @@ function App() {
                   />
                 ))}
               </div>
+
               <div className="w-full">
                 <Map restaurants={restaurants} />
               </div>
