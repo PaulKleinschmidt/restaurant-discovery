@@ -45,12 +45,12 @@ function App() {
           <Header loading={loading} onSearch={setSearchTerm} />
 
           {restaurants && (
-            <div className="w-screen flex h-[calc(100vh-64px)]">
+            <div className="w-screen flex h-[calc(100vh-7rem)] lg:h-[calc(100vh-64px)]">
               <div
                 className={cx(
-                  view === ViewTypes.Map
-                    ? 'w-full md:w-4/12'
-                    : 'hidden md:w-4/12 md:block',
+                  view === ViewTypes.List
+                    ? 'w-full lg:w-4/12'
+                    : 'hidden lg:w-4/12 lg:block',
                   'overflow-auto h-full bg-gray'
                 )}
               >
@@ -62,7 +62,11 @@ function App() {
                 ))}
               </div>
 
-              <div className="w-full">
+              <div
+                className={cx(
+                  view === ViewTypes.Map ? 'w-full' : 'hidden lg:block w-full'
+                )}
+              >
                 <Map restaurants={restaurants} />
               </div>
             </div>
