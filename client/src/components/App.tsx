@@ -39,14 +39,7 @@ function App() {
         value={{ selectedRestaurant, setSelectedRestaurant }}
       >
         <div className="App bg-gray h-screen font-manrope">
-          <Header
-            loading={loading}
-            onSearch={(query) => {
-              // setLoading(true);
-              setSearchTerm(query);
-              // debounceSearch();
-            }}
-          />
+          <Header loading={loading} onSearch={setSearchTerm} />
 
           {restaurants && (
             <div className="flex">
