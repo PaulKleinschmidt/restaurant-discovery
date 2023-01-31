@@ -8,8 +8,9 @@ import { Map } from './Map';
 import { RestaurantContext } from '../context/RestaurantContext';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ErrorFallback } from './ErrorFallback';
-import { ViewTypes } from '../types/ViewTypes';
+import { View } from '../types/View';
 import cx from 'classnames';
+import { ToggleView } from './ToggleView';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
@@ -20,7 +21,7 @@ function App() {
   const [selectedRestaurant, setSelectedRestaurant] =
     useState<Restaurant | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [view, setView] = useState<ViewTypes>(ViewTypes.List);
+  const [view, setView] = useState<View>(View.List);
 
   useEffect(() => {
     setLoading(true);
@@ -45,10 +46,10 @@ function App() {
           <Header loading={loading} onSearch={setSearchTerm} />
 
           {restaurants && (
-            <div className="w-screen flex h-[calc(100vh-7rem)] lg:h-[calc(100vh-64px)]">
+            <div className="w-screen flex h-[calc(100vh-7rem)] lg:h-[calc(100vh-64px)] relative">
               <div
                 className={cx(
-                  view === ViewTypes.List
+                  view === View.List
                     ? 'w-full lg:w-4/12'
                     : 'hidden lg:w-4/12 lg:block',
                   'overflow-auto h-full bg-gray'
@@ -64,11 +65,13 @@ function App() {
 
               <div
                 className={cx(
-                  view === ViewTypes.Map ? 'w-full' : 'hidden lg:block w-full'
+                  view === View.Map ? 'w-full' : 'hidden lg:block w-full'
                 )}
               >
                 <Map restaurants={restaurants} />
               </div>
+
+              <ToggleView view={view} toggleView={setView} />
             </div>
           )}
         </div>
