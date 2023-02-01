@@ -6,6 +6,7 @@ import { default as placeholderImage } from '../assets/placeholder-image.png';
 import { useContext } from 'react';
 import { RestaurantContext } from '../context/RestaurantContext';
 import cx from 'classnames';
+import * as R from 'ramda';
 
 type Props = {
   restaurant: Restaurant;
@@ -13,7 +14,7 @@ type Props = {
 };
 
 export const RestaurantItem = ({ restaurant, hideBorder }: Props) => {
-  const { setSelectedRestaurant, selectedRestaurant } =
+  const { setSelectedRestaurant, selectedRestaurant, setFavorites, favorites } =
     useContext(RestaurantContext);
 
   const isSelectedRestaurant =
@@ -22,6 +23,21 @@ export const RestaurantItem = ({ restaurant, hideBorder }: Props) => {
   const imageSrc = restaurant.image
     ? 'data:image/png;base64,' + restaurant.image
     : placeholderImage;
+
+  const isFavorited = R.includes(
+    R.prop('place_id', restaurant),
+    R.pluck('place_id', favorites)
+  );
+
+  const onFavoriteClick = () => {
+    if (isFavorited) {
+      setFavorites(
+        R.reject(R.propEq('place_id', restaurant.place_id))(favorites)
+      );
+    } else {
+      setFavorites([...favorites, restaurant]);
+    }
+  };
 
   return (
     <div
@@ -40,7 +56,12 @@ export const RestaurantItem = ({ restaurant, hideBorder }: Props) => {
       />
       <div className="ml-3 w-full">
         <div className="flex justify-between mb-1 text-textPrimary">
-          {restaurant.name} <img src={bookmarkResting} alt="favorite" />
+          {restaurant.name}{' '}
+          <img
+            onClick={onFavoriteClick}
+            src={isFavorited ? bookmarkSaved : bookmarkResting}
+            alt="favorite"
+          />
         </div>
         <div className="flex mb-1 text-sm">
           <img src={star} alt="star" className="mr-1" />

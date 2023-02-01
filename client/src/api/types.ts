@@ -50,7 +50,5 @@ export const Restaurant = z.object({
   types: z.string().array().optional(),
   image: z.string().optional(),
 });
-export const RestaurantResults = z.array(Restaurant);
-
+export const APIResponse = z.array(Restaurant);
 export type Restaurant = z.infer<typeof Restaurant>;
-export type RestaurantResults = z.infer<typeof RestaurantResults>;

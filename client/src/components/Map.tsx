@@ -1,9 +1,9 @@
-import { Restaurant, RestaurantResults } from '../api/types';
+import { Restaurant } from '../api/types';
 import GoogleMapReact from 'google-map-react';
 import { MapLocation } from './MapLocation';
 
 type Props = {
-  restaurants: RestaurantResults;
+  restaurants: Restaurant[];
 };
 
 export const Map = ({ restaurants }: Props) => {

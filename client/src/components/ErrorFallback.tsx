@@ -10,8 +10,10 @@ export const ErrorFallback = ({ error }: Props) => {
     console.error(error.message);
   }, [error]);
   return (
-    <div role="alert">
-      <p>⚠️ Something went wrong. Please try again later.</p>
+    <div className="bg-gray h-screen" role="alert">
+      <h1 className="text-center font-manrope pt-12">
+        ⚠️ Something went wrong. Please refresh the page or try again later
+      </h1>
     </div>
   );
 };

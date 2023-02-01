@@ -1,4 +1,4 @@
-import { Restaurant, RestaurantResults } from '../api/types';
+import { Restaurant } from '../api/types';
 import { default as pinResting } from '../assets/pin-resting.svg';
 import { default as pinSelected } from '../assets/pin-selected.svg';
 import { RestaurantItem } from './RestaurantItem';

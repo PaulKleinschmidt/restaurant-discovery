@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { searchRestaurants } from '../api/searchRestaurants';
-import { Restaurant, RestaurantResults } from '../api/types';
+import { Restaurant } from '../api/types';
 import { Header } from './Header';
 import { RestaurantItem } from './RestaurantItem';
 import { Map } from './Map';
@@ -11,12 +11,17 @@ import { ErrorFallback } from './ErrorFallback';
 import { View } from '../types/View';
 import cx from 'classnames';
 import { ToggleView } from './ToggleView';
+import * as R from 'ramda';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
-  const [restaurants, setRestaurants] = useState<RestaurantResults | null>(
-    null
-  );
+  const [restaurants, setRestaurants] = useState<Restaurant[] | null>(null);
+  const [favorites, setFavorites] = useState<Restaurant[]>(() => {
+    const localStorageFavorites = localStorage.getItem('favorites');
+    return R.isNil(localStorageFavorites)
+      ? []
+      : JSON.parse(localStorageFavorites);
+  });
   const [error, setError] = useState<Error | null>(null);
   const [selectedRestaurant, setSelectedRestaurant] =
     useState<Restaurant | null>(null);
@@ -25,13 +30,17 @@ function App() {
 
   useEffect(() => {
     setLoading(true);
-    const timer = setTimeout(async () => {
+    const debounceTimer = setTimeout(async () => {
       await searchRestaurants(searchTerm).then(setRestaurants).catch(setError);
       setLoading(false);
     }, 1000);
 
-    return () => clearTimeout(timer);
+    return () => clearTimeout(debounceTimer);
   }, [searchTerm]);
+
+  useEffect(() => {
+    localStorage.setItem('favorites', JSON.stringify(favorites));
+  }, [favorites]);
 
   if (error) {
     return <ErrorFallback error={error} />;
@@ -40,7 +49,12 @@ function App() {
   return (
     <ErrorBoundary FallbackComponent={ErrorFallback}>
       <RestaurantContext.Provider
-        value={{ selectedRestaurant, setSelectedRestaurant }}
+        value={{
+          selectedRestaurant,
+          setSelectedRestaurant,
+          favorites,
+          setFavorites,
+        }}
       >
         <div className="App bg-gray h-screen font-manrope relative">
           <Header loading={loading} onSearch={setSearchTerm} />
