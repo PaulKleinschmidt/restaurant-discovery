@@ -1,7 +1,7 @@
 class RestaurantsController < ApplicationController
   def search
     if params[:query]
-      @response = RestClient.get "#{GOOGLE_API_BASE_URL}/textsearch/json?query=#{params[:query]}
+      @response = RestClient.get "#{GOOGLE_API_BASE_URL}/textsearch/json?query=#{params[:query]}&location=#{params[:location]}
                                   &key=#{API_KEY}&type=restaurant".strip,
                                  { content_type: :json, accept: :json }
 
@@ -29,6 +29,7 @@ def add_images_to_restaurants(restaurants)
     image = RestClient.get "#{GOOGLE_API_BASE_URL}/photo?maxheight=72
                             &photo_reference=#{photo_reference}&key=#{API_KEY}".strip,
                            { content_type: :json, accept: :json }
+
     restaurant["image"] = Base64.encode64(image)
   end
 end

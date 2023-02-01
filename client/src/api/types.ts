@@ -14,7 +14,7 @@ const Geometry = z.object({
 });
 
 const OpeningHours = z.object({
-  open_now: z.boolean(),
+  open_now: z.boolean().optional(),
 });
 
 const Photo = z.object({

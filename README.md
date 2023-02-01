@@ -12,4 +12,4 @@ This repo contains my solution to the AllTrails interview code challenge. The fr
 
 ## Bonus features completed
 
-✅ Favorite restaurants
+✅ Allow the user to flag restaurants as a favorite

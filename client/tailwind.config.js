@@ -4,9 +4,6 @@ const colors = require('tailwindcss/colors');
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
-    fontSize: {
-      sm: '0.8125rem',
-    },
     colors: {
       transparent: colors.transparent,
       gray: '#EFEFEC',
@@ -26,6 +23,9 @@ module.exports = {
       },
       fontFamily: {
         manrope: ['Manrope', 'sans-serif'],
+      },
+      fontSize: {
+        sm: '0.8125rem',
       },
     },
   },

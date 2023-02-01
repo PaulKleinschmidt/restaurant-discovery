@@ -12,9 +12,22 @@ import { View } from '../types/View';
 import cx from 'classnames';
 import { ToggleView } from './ToggleView';
 import * as R from 'ramda';
+import { NoResults } from './NoResults';
+import { Loading } from './Loading';
+import { LoadingState } from '../types/LoadingState';
 
 function App() {
-  const [loading, setLoading] = useState<boolean>(true);
+  /*
+    There are two places where a loading animation can appear:
+      1. On initial app load
+      2. In the serach bar after updating the search term
+      3. In the "Search this area" button after clicking it
+  */
+  const [loadingState, setLoadingState] = useState<LoadingState>({
+    initial: true,
+    searchTerm: false,
+    searchLocation: false,
+  });
   const [restaurants, setRestaurants] = useState<TRestaurant[] | null>(null);
   const [favorites, setFavorites] = useState<TRestaurant[]>(() => {
     const localStorageFavorites = localStorage.getItem('favorites');
@@ -27,23 +40,41 @@ function App() {
     useState<TRestaurant | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [view, setView] = useState<View>(View.List);
+  const [searchArea, setSearchArea] = useState('');
 
   useEffect(() => {
-    setLoading(true);
     const debounceTimer = setTimeout(async () => {
-      await searchRestaurants(searchTerm).then(setRestaurants).catch(setError);
-      setLoading(false);
+      await searchRestaurants(searchTerm, searchArea)
+        .then(setRestaurants)
+        .catch(setError);
+      setLoadingState({
+        searchTerm: false,
+        searchLocation: false,
+        initial: false,
+      });
     }, 1000);
 
     return () => clearTimeout(debounceTimer);
-  }, [searchTerm]);
+  }, [searchTerm, searchArea]);
 
   useEffect(() => {
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }, [favorites]);
 
+  useEffect(() => {
+    setLoadingState((prevState) => ({ ...prevState, searchTerm: true }));
+  }, [searchTerm]);
+
+  useEffect(() => {
+    setLoadingState((prevState) => ({ ...prevState, searchLocation: true }));
+  }, [searchArea]);
+
   if (error) {
     return <ErrorFallback error={error} />;
+  }
+
+  if (loadingState.initial) {
+    return <Loading />;
   }
 
   return (
@@ -57,7 +88,7 @@ function App() {
         }}
       >
         <div className="App bg-gray h-screen font-manrope relative">
-          <Header loading={loading} onSearch={setSearchTerm} />
+          <Header loading={loadingState.searchTerm} onSearch={setSearchTerm} />
 
           {restaurants && (
             <div className="w-screen flex h-[calc(100vh-7rem)] lg:h-[calc(100vh-64px)]">
@@ -69,12 +100,16 @@ function App() {
                   'overflow-auto h-full bg-gray'
                 )}
               >
-                {restaurants.map((restaurant) => (
-                  <RestaurantItem
-                    key={restaurant.place_id}
-                    restaurant={restaurant}
-                  />
-                ))}
+                {restaurants.length === 0 ? (
+                  <NoResults />
+                ) : (
+                  restaurants.map((restaurant) => (
+                    <RestaurantItem
+                      key={restaurant.place_id}
+                      restaurant={restaurant}
+                    />
+                  ))
+                )}
               </div>
 
               <div
@@ -82,7 +117,11 @@ function App() {
                   view === View.Map ? 'w-full' : 'hidden lg:block w-full'
                 )}
               >
-                <Map restaurants={restaurants} />
+                <Map
+                  loading={loadingState.searchLocation}
+                  restaurants={restaurants}
+                  setSearchArea={setSearchArea}
+                />
               </div>
 
               <ToggleView view={view} toggleView={setView} />
