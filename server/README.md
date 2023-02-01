@@ -28,6 +28,6 @@ rails s
 
 ## Routes
 
-| Route                          | Params              | Description                                                                                                  |
-| ------------------------------ | ------------------- | ------------------------------------------------------------------------------------------------------------ |
-| /api/restaurants/search?query= | `query`, `location` | Returns a list of restaurants that match the search query and location. A maximum of 20 results are returned |
+| Route                   | Params              | Description                                                                                                  |
+| ----------------------- | ------------------- | ------------------------------------------------------------------------------------------------------------ |
+| /api/restaurants/search | `query`, `location` | Returns a list of restaurants that match the search query and location. A maximum of 20 results are returned |

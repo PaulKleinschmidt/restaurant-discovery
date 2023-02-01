@@ -17,7 +17,7 @@ import { LoadingState } from '../types/LoadingState';
 
 function App() {
   /*
-    There are two places where a loading animation can appear:
+    There are three places where a loading animation can appear:
       1. On initial app load
       2. In the serach bar after updating the search term
       3. In the "Search this area" button after clicking it
