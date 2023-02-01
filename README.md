@@ -8,6 +8,7 @@ This repo contains my solution to the AllTrails interview code challenge. The fr
 ## Screenshots
 
 <img width="1631" alt="image" src="https://user-images.githubusercontent.com/32469657/216180242-e1ca7ea0-d3dd-4cae-a33f-b3b58662e10c.png">
+<img width="1634" alt="image" src="https://user-images.githubusercontent.com/32469657/216186220-7daf2e85-43c5-4201-87ef-04b3bb9d5612.png">
 <img width="389" alt="image" src="https://user-images.githubusercontent.com/32469657/215960109-141cadd7-0e3d-4de6-90b5-78d0a90a9853.png">
 <img width="392" alt="Screen Shot 2023-02-01 at 2 40 14 PM" src="https://user-images.githubusercontent.com/32469657/216180419-8fefbe70-863e-4a81-ab37-d24a580ea977.png">
 

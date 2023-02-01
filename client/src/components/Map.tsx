@@ -24,6 +24,7 @@ export const Map = ({ restaurants, setSearchArea, loading }: TProps) => {
   });
 
   useEffect(() => {
+    // Reset map coordinates when restaurants load
     setNewMapCoordinates(null);
   }, [restaurants]);
 
@@ -36,7 +37,7 @@ export const Map = ({ restaurants, setSearchArea, loading }: TProps) => {
       {newMapCoordinates && (
         <button
           className="absolute top-4 z-50 bg-gray shadow-sm py-2 px-4 rounded-4xl text-sm font-semibold translate-x-[-50%]"
-          onClick={() => newMapCoordinates && setSearchArea(newMapCoordinates)}
+          onClick={() => setSearchArea(newMapCoordinates)}
         >
           <div className="flex">
             {loading ? (

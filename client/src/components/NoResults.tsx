@@ -5,7 +5,7 @@ export const NoResults = () => {
         😿 Sorry! No results found
       </div>
       <div className="mt-6 text-textSecondary">
-        Try changing the search keyword or map area
+        Try changing the search keyword or adjusting the map area
       </div>
     </div>
   );
