@@ -42,11 +42,11 @@ function App() {
       <RestaurantContext.Provider
         value={{ selectedRestaurant, setSelectedRestaurant }}
       >
-        <div className="App bg-gray h-screen font-manrope">
+        <div className="App bg-gray h-screen font-manrope relative">
           <Header loading={loading} onSearch={setSearchTerm} />
 
           {restaurants && (
-            <div className="w-screen flex h-[calc(100vh-7rem)] lg:h-[calc(100vh-64px)] relative">
+            <div className="w-screen flex h-[calc(100vh-7rem)] lg:h-[calc(100vh-64px)]">
               <div
                 className={cx(
                   view === View.List
