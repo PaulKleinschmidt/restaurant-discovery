@@ -1,20 +1,6 @@
 # AllTrails Restaurant Discovery Frontend
 
-## Technologies Used
-
-| Tech                 | Description                                            |
-| -------------------- | ------------------------------------------------------ |
-| React                | Frontend framework                                     |
-| Typescript           | Static typing                                          |
-| Zod                  | Schema delcaration and validation                      |
-| Ramda                | Utility functions                                      |
-| Tailwind             | CSS framework                                          |
-| Classnames           | Utility for conditionally joining class names together |
-| react-error-boundary | UI Error handling                                      |
-| Axios                | HTTP Client                                            |
-| google-map-react     | React wrapper for the Google Maps API                  |
-
-## Running the project
+## Running the project locally
 
 Add the following required ENV variables to .env:
 
@@ -31,3 +17,17 @@ npm start
 ```
 
 Open [http://localhost:4000](http://localhost:3000) to view it in the browser.
+
+## Technologies Used
+
+| Tech                 | Description                                            |
+| -------------------- | ------------------------------------------------------ |
+| React                | Frontend framework                                     |
+| Typescript           | Static typing                                          |
+| Zod                  | Schema delcaration and validation                      |
+| Ramda                | Utility functions                                      |
+| Tailwind             | CSS framework                                          |
+| Classnames           | Utility for conditionally joining class names together |
+| react-error-boundary | UI Error handling                                      |
+| Axios                | HTTP Client                                            |
+| google-map-react     | React wrapper for the Google Maps API                  |

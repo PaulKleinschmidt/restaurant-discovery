@@ -1,24 +1,33 @@
-# README
+# AllTrails Restaurant Discovery Code Challenge API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+A Rails API for exposing the Google Places API to the client.
 
-Things you may want to cover:
+## Running the project locally
 
-* Ruby version
+- Install Ruby version 2.7.0 or later
+- Follow [these steps](https://guides.rubyonrails.org/getting_startedhtml#creating-a-new-rails-project-installing-rails) to install Rails
 
-* System dependencies
+The `places_api_key` ENV variable is required to run the project. This is set in encrypted credentials. Run the following command to edit the credentials file.
 
-* Configuration
+```
+EDITOR="code --wait" bin/rails credentials:edit
+```
 
-* Database creation
+Add the `places_api_key` to the file
 
-* Database initialization
+```
+places_api_key: 'your-google-api-key'
+```
 
-* How to run the test suite
+Run the following commands in the project directory to run the api on port 4000:
 
-* Services (job queues, cache servers, search engines, etc.)
+```
+bundle install
+rails s
+```
 
-* Deployment instructions
+## Routes
 
-* ...
+| Route                          | Description                                                                                      |
+| ------------------------------ | ------------------------------------------------------------------------------------------------ |
+| /api/restaurants/search?query= | Returns a list of restaurants that match the search string. A maximum of 20 results are returned |
