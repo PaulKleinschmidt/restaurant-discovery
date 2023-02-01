@@ -19,7 +19,7 @@ If you need to modify or add credentials, Run the following command to edit the 
 EDITOR="code --wait" bin/rails credentials:edit
 ```
 
-Run the following commands in the project directory to run the api on port 4000:
+Run the following commands in the project directory to run the API on port 4000:
 
 ```
 bundle install
