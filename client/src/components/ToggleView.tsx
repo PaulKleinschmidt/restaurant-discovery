@@ -1,14 +1,14 @@
-import { View } from '../types/View';
+import { MobileView } from '../types/MobileView';
 import { default as map } from '../assets/map.svg';
 import { default as list } from '../assets/list.svg';
 
 type TProps = {
-  view: View;
-  toggleView(view: View): void;
+  view: MobileView;
+  toggleView(view: MobileView): void;
 };
 
-const toggleViewValue = (view: View) =>
-  view === View.Map ? View.List : View.Map;
+const toggleViewValue = (view: MobileView) =>
+  view === MobileView.Map ? MobileView.List : MobileView.Map;
 
 export const ToggleView = ({ view, toggleView }: TProps) => {
   return (
@@ -18,7 +18,7 @@ export const ToggleView = ({ view, toggleView }: TProps) => {
     >
       <img
         className="pr-2"
-        src={view === View.Map ? list : map}
+        src={view === MobileView.Map ? list : map}
         alt="toggle icon"
       />
       {toggleViewValue(view)}

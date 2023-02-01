@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import './App.css';
 import { searchRestaurants } from '../api/searchRestaurants';
 import { TRestaurant } from '../api/types';
 import { Header } from './Header';
@@ -8,7 +7,7 @@ import { Map } from './Map';
 import { RestaurantContext } from '../context/RestaurantContext';
 import { ErrorBoundary } from 'react-error-boundary';
 import { ErrorFallback } from './ErrorFallback';
-import { View } from '../types/View';
+import { MobileView } from '../types/MobileView';
 import cx from 'classnames';
 import { ToggleView } from './ToggleView';
 import * as R from 'ramda';
@@ -39,7 +38,7 @@ function App() {
   const [selectedRestaurant, setSelectedRestaurant] =
     useState<TRestaurant | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
-  const [view, setView] = useState<View>(View.List);
+  const [view, setView] = useState<MobileView>(MobileView.List);
   const [searchArea, setSearchArea] = useState('');
 
   useEffect(() => {
@@ -87,14 +86,14 @@ function App() {
           setFavorites,
         }}
       >
-        <div className="App bg-gray h-screen font-manrope relative">
+        <div className="App bg-gray h-screen font-manrope relative text-center">
           <Header loading={loadingState.searchTerm} onSearch={setSearchTerm} />
 
           {restaurants && (
             <div className="w-screen flex h-[calc(100vh-7rem)] lg:h-[calc(100vh-64px)]">
               <div
                 className={cx(
-                  view === View.List
+                  view === MobileView.List
                     ? 'w-full lg:w-5/12'
                     : 'hidden lg:w-5/12	 lg:block',
                   'overflow-auto h-full bg-gray'
@@ -114,7 +113,7 @@ function App() {
 
               <div
                 className={cx(
-                  view === View.Map ? 'w-full' : 'hidden lg:block w-full'
+                  view === MobileView.Map ? 'w-full' : 'hidden lg:block w-full'
                 )}
               >
                 <Map

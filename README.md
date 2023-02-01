@@ -14,3 +14,4 @@ This repo contains my solution to the AllTrails interview code challenge. The fr
 ## Bonus features completed
 
 ✅ Allow the user to flag restaurants as a favorite
+✅ Allow the user to move the map and requery restaurants endpoint based on new location

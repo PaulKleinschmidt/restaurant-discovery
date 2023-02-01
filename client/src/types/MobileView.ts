@@ -1,4 +1,4 @@
-export enum View {
+export enum MobileView {
   List = 'List',
   Map = 'Map',
 }
