@@ -1,12 +1,12 @@
-import { Restaurant } from '../api/types';
+import { TRestaurant } from '../api/types';
 import GoogleMapReact from 'google-map-react';
 import { MapLocation } from './MapLocation';
 
-type Props = {
-  restaurants: Restaurant[];
+type TProps = {
+  restaurants: TRestaurant[];
 };
 
-export const Map = ({ restaurants }: Props) => {
+export const Map = ({ restaurants }: TProps) => {
   const initialLat = restaurants[0].geometry.location.lat;
   const initialLong = restaurants[0].geometry.location.lng;
 

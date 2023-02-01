@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import './App.css';
 import { searchRestaurants } from '../api/searchRestaurants';
-import { Restaurant } from '../api/types';
+import { TRestaurant } from '../api/types';
 import { Header } from './Header';
 import { RestaurantItem } from './RestaurantItem';
 import { Map } from './Map';
@@ -15,8 +15,8 @@ import * as R from 'ramda';
 
 function App() {
   const [loading, setLoading] = useState<boolean>(true);
-  const [restaurants, setRestaurants] = useState<Restaurant[] | null>(null);
-  const [favorites, setFavorites] = useState<Restaurant[]>(() => {
+  const [restaurants, setRestaurants] = useState<TRestaurant[] | null>(null);
+  const [favorites, setFavorites] = useState<TRestaurant[]>(() => {
     const localStorageFavorites = localStorage.getItem('favorites');
     return R.isNil(localStorageFavorites)
       ? []
@@ -24,7 +24,7 @@ function App() {
   });
   const [error, setError] = useState<Error | null>(null);
   const [selectedRestaurant, setSelectedRestaurant] =
-    useState<Restaurant | null>(null);
+    useState<TRestaurant | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [view, setView] = useState<View>(View.List);
 
@@ -64,8 +64,8 @@ function App() {
               <div
                 className={cx(
                   view === View.List
-                    ? 'w-full lg:w-4/12'
-                    : 'hidden lg:w-4/12 lg:block',
+                    ? 'w-full lg:w-5/12'
+                    : 'hidden lg:w-5/12	 lg:block',
                   'overflow-auto h-full bg-gray'
                 )}
               >

@@ -1,4 +1,4 @@
-import { Restaurant } from '../api/types';
+import { TRestaurant } from '../api/types';
 import { default as star } from '../assets/star.svg';
 import { default as bookmarkResting } from '../assets/bookmark-resting.svg';
 import { default as bookmarkSaved } from '../assets/bookmark-saved.svg';
@@ -8,12 +8,12 @@ import { RestaurantContext } from '../context/RestaurantContext';
 import cx from 'classnames';
 import * as R from 'ramda';
 
-type Props = {
-  restaurant: Restaurant;
+type TProps = {
+  restaurant: TRestaurant;
   hideBorder?: boolean;
 };
 
-export const RestaurantItem = ({ restaurant, hideBorder }: Props) => {
+export const RestaurantItem = ({ restaurant, hideBorder }: TProps) => {
   const { setSelectedRestaurant, selectedRestaurant, setFavorites, favorites } =
     useContext(RestaurantContext);
 
@@ -29,7 +29,12 @@ export const RestaurantItem = ({ restaurant, hideBorder }: Props) => {
     R.pluck('place_id', favorites)
   );
 
-  const onFavoriteClick = () => {
+  const handleFlagClick = (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>
+  ) => {
+    // Prevent flag click event from bubbling and triggering restaurant selection
+    e.stopPropagation();
+
     if (isFavorited) {
       setFavorites(
         R.reject(R.propEq('place_id', restaurant.place_id))(favorites)
@@ -51,14 +56,14 @@ export const RestaurantItem = ({ restaurant, hideBorder }: Props) => {
     >
       <img
         src={imageSrc}
-        className="w-16 h-[72px] object-cover border-c"
-        alt="Restaurant image"
+        className="w-16 h-[72px] object-cover"
+        alt={restaurant.name}
       />
       <div className="ml-3 w-full">
         <div className="flex justify-between mb-1 text-textPrimary">
           {restaurant.name}{' '}
           <img
-            onClick={onFavoriteClick}
+            onClick={handleFlagClick}
             src={isFavorited ? bookmarkSaved : bookmarkResting}
             alt="favorite"
           />

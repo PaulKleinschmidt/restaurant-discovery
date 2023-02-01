@@ -1,12 +1,12 @@
 import { default as logo } from '../assets/logo.svg';
 import { default as search } from '../assets/search.svg';
 
-type Props = {
+type TProps = {
   onSearch(query: string): void;
   loading: boolean;
 };
 
-export const Header = ({ onSearch, loading }: Props) => (
+export const Header = ({ onSearch, loading }: TProps) => (
   <div className="block lg:flex w-full bg-white justify-between py-4 px-6 h-28 lg:h-16 border-b-gray2 border-b-2">
     <img src={logo} alt="logo" className="mx-auto my-1 lg:mx-0 lg:my-0" />
 

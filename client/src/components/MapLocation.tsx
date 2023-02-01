@@ -1,17 +1,17 @@
-import { Restaurant } from '../api/types';
+import { TRestaurant } from '../api/types';
 import { default as pinResting } from '../assets/pin-resting.svg';
 import { default as pinSelected } from '../assets/pin-selected.svg';
 import { RestaurantItem } from './RestaurantItem';
 import { useContext } from 'react';
 import { RestaurantContext } from '../context/RestaurantContext';
 
-type Props = {
+type TProps = {
   lat: number;
   lng: number;
-  restaurant: Restaurant;
+  restaurant: TRestaurant;
 };
 
-export const MapLocation = ({ restaurant }: Props) => {
+export const MapLocation = ({ restaurant }: TProps) => {
   const { setSelectedRestaurant, selectedRestaurant } =
     useContext(RestaurantContext);
 

@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
 
-type Props = {
+type TProps = {
   error: Error;
 };
 
-export const ErrorFallback = ({ error }: Props) => {
+export const ErrorFallback = ({ error }: TProps) => {
   useEffect(() => {
     // Ideally I would log to an external error logging client here
     console.error(error.message);

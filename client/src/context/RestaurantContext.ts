@@ -1,14 +1,14 @@
 import { createContext } from 'react';
-import { Restaurant } from '../api/types';
+import { TRestaurant } from '../api/types';
 
-type RestaurantContext = {
-  selectedRestaurant: Restaurant | null;
-  setSelectedRestaurant(restaurant: Restaurant): void;
-  favorites: Restaurant[];
-  setFavorites(restaurants: Restaurant[]): void;
+type TRestaurantContext = {
+  selectedRestaurant: TRestaurant | null;
+  setSelectedRestaurant(restaurant: TRestaurant): void;
+  favorites: TRestaurant[];
+  setFavorites(restaurants: TRestaurant[]): void;
 };
 
-export const RestaurantContext = createContext<RestaurantContext>({
+export const RestaurantContext = createContext<TRestaurantContext>({
   selectedRestaurant: null,
   setSelectedRestaurant: () => {},
   favorites: [],
