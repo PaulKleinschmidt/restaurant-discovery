@@ -1,9 +1,9 @@
 class RestaurantsController < ApplicationController
   def search
     if params[:query]
-      @response = RestClient.get "#{GOOGLE_API_BASE_URL}/textsearch/json?query=#{params[:query]}&location=#{params[:location]}
-                                  &key=#{API_KEY}&type=restaurant".strip,
-                                 { content_type: :json, accept: :json }
+      @response = RestClient.get "#{GOOGLE_API_BASE_URL}/textsearch/json?query=#{params[:query]}
+                                  &location=#{params[:location]}&key=#{API_KEY}
+                                  &type=restaurant".strip, { content_type: :json, accept: :json }
 
       @results = JSON.parse(@response.body)["results"]
 
