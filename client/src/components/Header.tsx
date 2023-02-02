@@ -27,9 +27,11 @@ export const Header = ({
         }}
       >
         {loadingState.searchTerm ? (
-          <span className="w-16	px-4" />
+          <span className="w-14	px-4" />
         ) : (
-          <img src={search} className="px-4 w-16" alt="search-icon" />
+          <button className="px-4 w-14" type="submit">
+            <img onClick={onSearch} src={search} alt="search-icon" />
+          </button>
         )}
         <input
           disabled={loadingState.searchLocation || loadingState.searchTerm}
