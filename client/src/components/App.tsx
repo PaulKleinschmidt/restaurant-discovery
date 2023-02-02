@@ -15,6 +15,8 @@ import { NoResults } from './NoResults';
 import { Loading } from './Loading';
 import { LoadingState } from '../types/LoadingState';
 
+const LOCAL_STORAGE_FAVORITES_KEY = 'favorites';
+
 function App() {
   /*
     There are three places where a loading animation can appear:
@@ -29,7 +31,9 @@ function App() {
   });
   const [restaurants, setRestaurants] = useState<TRestaurant[] | null>(null);
   const [favorites, setFavorites] = useState<TRestaurant[]>(() => {
-    const localStorageFavorites = localStorage.getItem('favorites');
+    const localStorageFavorites = localStorage.getItem(
+      LOCAL_STORAGE_FAVORITES_KEY
+    );
     return R.isNil(localStorageFavorites)
       ? []
       : JSON.parse(localStorageFavorites);
@@ -41,32 +45,30 @@ function App() {
   const [mobileView, setMobileView] = useState<MobileView>(MobileView.List);
   const [searchArea, setSearchArea] = useState('');
 
-  useEffect(() => {
-    const debounceTimer = setTimeout(async () => {
-      await searchRestaurants(searchTerm, searchArea)
-        .then(setRestaurants)
-        .catch(setError);
-      setLoadingState({
-        searchTerm: false,
-        searchLocation: false,
-        initial: false,
-      });
-    }, 1000);
+  const onSearch = async () => {
+    await searchRestaurants(searchTerm, searchArea)
+      .then(setRestaurants)
+      .catch(setError);
 
-    return () => clearTimeout(debounceTimer);
-  }, [searchTerm, searchArea]);
+    setLoadingState({
+      searchTerm: false,
+      searchLocation: false,
+      initial: false,
+    });
+  };
 
   useEffect(() => {
-    localStorage.setItem('favorites', JSON.stringify(favorites));
+    onSearch();
+    // Disabling eslint check to ensure this useEffect runs on initial mount only
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(
+      LOCAL_STORAGE_FAVORITES_KEY,
+      JSON.stringify(favorites)
+    );
   }, [favorites]);
-
-  useEffect(() => {
-    setLoadingState((prevState) => ({ ...prevState, searchTerm: true }));
-  }, [searchTerm]);
-
-  useEffect(() => {
-    setLoadingState((prevState) => ({ ...prevState, searchLocation: true }));
-  }, [searchArea]);
 
   if (error) {
     return <ErrorFallback error={error} />;
@@ -87,7 +89,18 @@ function App() {
         }}
       >
         <div className="App bg-gray h-screen font-manrope relative text-center">
-          <Header loading={loadingState.searchTerm} onSearch={setSearchTerm} />
+          <Header
+            loadingState={loadingState}
+            updateSearchTerm={setSearchTerm}
+            onSearch={() => {
+              setLoadingState((prevState) => ({
+                ...prevState,
+                searchTerm: true,
+              }));
+
+              onSearch();
+            }}
+          />
 
           {restaurants && (
             <div className="w-screen flex h-[calc(100vh-7rem)] lg:h-[calc(100vh-4rem)]">
@@ -119,7 +132,14 @@ function App() {
                 )}
               >
                 <Map
-                  loading={loadingState.searchLocation}
+                  onSearch={() => {
+                    setLoadingState((prevState) => ({
+                      ...prevState,
+                      searchLocation: true,
+                    }));
+                    onSearch();
+                  }}
+                  loadingState={loadingState}
                   restaurants={restaurants}
                   setSearchArea={setSearchArea}
                 />
