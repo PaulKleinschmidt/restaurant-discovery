@@ -97,11 +97,9 @@ function App() {
                 ...prevState,
                 searchTerm: true,
               }));
-
               onSearch();
             }}
           />
-
           {restaurants && (
             <div className="w-screen flex h-[calc(100vh-7rem)] lg:h-[calc(100vh-4rem)]">
               <div
@@ -123,7 +121,6 @@ function App() {
                   ))
                 )}
               </div>
-
               <div
                 className={cx(
                   mobileView === MobileView.Map
@@ -144,7 +141,6 @@ function App() {
                   setSearchArea={setSearchArea}
                 />
               </div>
-
               <ToggleMobileView
                 mobileView={mobileView}
                 setMobileView={setMobileView}

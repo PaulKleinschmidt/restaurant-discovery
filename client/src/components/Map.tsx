@@ -31,7 +31,7 @@ export const Map = ({
 
   useEffect(() => {
     setSearchButtonVisible(false);
-  }, [restaurants]);
+  }, [restaurants, loadingState.searchTerm]);
 
   if (!process.env.REACT_APP_GOOGLE_MAPS_API_KEY) {
     throw new Error('REACT_APP_GOOGLE_MAPS_API_KEY env variable not set');
@@ -39,7 +39,7 @@ export const Map = ({
 
   return (
     <div className="h-full w-full relative">
-      {searchButtonVisible && !loadingState.searchTerm && (
+      {searchButtonVisible && (
         <button
           className="absolute top-4 z-50 bg-gray shadow-sm py-2 px-4 rounded-4xl text-sm font-semibold translate-x-[-50%]"
           onClick={onSearch}
