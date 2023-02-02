@@ -3,13 +3,13 @@ import GoogleMapReact from 'google-map-react';
 import { MapLocation } from './MapLocation';
 import { useEffect, useRef, useState } from 'react';
 import { default as search } from '../assets/search.svg';
-import { LoadingState } from '../types/LoadingState';
+import { TLoadingState } from '../types/LoadingState';
 
 type TProps = {
   restaurants: TRestaurant[];
   setSearchArea(coordinates: string): void;
   onSearch(): void;
-  loadingState: LoadingState;
+  loadingState: TLoadingState;
 };
 
 export const Map = ({

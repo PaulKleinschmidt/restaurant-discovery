@@ -1,4 +1,4 @@
-export type LoadingState = {
+export type TLoadingState = {
   searchTerm: boolean;
   searchLocation: boolean;
   initial: boolean;

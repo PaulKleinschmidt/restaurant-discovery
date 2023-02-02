@@ -13,7 +13,7 @@ import { ToggleMobileView } from './ToggleMobileView';
 import * as R from 'ramda';
 import { NoResults } from './NoResults';
 import { Loading } from './Loading';
-import { LoadingState } from '../types/LoadingState';
+import { TLoadingState } from '../types/LoadingState';
 
 const LOCAL_STORAGE_FAVORITES_KEY = 'favorites';
 
@@ -24,7 +24,7 @@ function App() {
       2. In the search bar after updating the search term
       3. In the "Search this area" button after clicking it
   */
-  const [loadingState, setLoadingState] = useState<LoadingState>({
+  const [loadingState, setLoadingState] = useState<TLoadingState>({
     initial: true,
     searchTerm: false,
     searchLocation: false,

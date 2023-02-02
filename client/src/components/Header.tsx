@@ -1,11 +1,11 @@
 import { default as logo } from '../assets/logo.svg';
 import { default as search } from '../assets/search.svg';
-import { LoadingState } from '../types/LoadingState';
+import { TLoadingState } from '../types/LoadingState';
 
 type TProps = {
   onSearch(): void;
   updateSearchTerm(query: string): void;
-  loadingState: LoadingState;
+  loadingState: TLoadingState;
 };
 
 export const Header = ({
