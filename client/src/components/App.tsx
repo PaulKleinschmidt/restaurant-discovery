@@ -21,7 +21,7 @@ function App() {
   /*
     There are three places where a loading animation can appear:
       1. On initial app load
-      2. In the serach bar after updating the search term
+      2. In the search bar after updating the search term
       3. In the "Search this area" button after clicking it
   */
   const [loadingState, setLoadingState] = useState<LoadingState>({
