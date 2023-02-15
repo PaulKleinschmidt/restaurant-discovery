@@ -1,19 +1,14 @@
-# AllTrails Restaurant Discovery Code Challenge
+# Restaurant Discovery
 
-This repo contains my submission to the AllTrails interview code challenge. The frontend is built using React and Typescript, and a Rails API is used to expose the Google Places API. The frontend and API code can be found in the `/client` and `/server` folders respectively. See their README files to get started:
+This project is a restuarant discovery application. The frontend is built using React and Typescript, and a Rails API is used to expose the Google Places API. The frontend and API code can be found in the `/client` and `/server` folders respectively. See their README files to get started:
 
 - [Client](https://github.com/PaulKleinschmidt/restaurant-discovery/blob/main/client/README.md)
 - [Server](https://github.com/PaulKleinschmidt/restaurant-discovery/blob/main/server/README.md)
 
 ## Screenshots
 
-<img width="1631" alt="image" src="https://user-images.githubusercontent.com/32469657/216180242-e1ca7ea0-d3dd-4cae-a33f-b3b58662e10c.png">
-<img width="1634" alt="image" src="https://user-images.githubusercontent.com/32469657/216186220-7daf2e85-43c5-4201-87ef-04b3bb9d5612.png">
-<img width="389" alt="image" src="https://user-images.githubusercontent.com/32469657/215960109-141cadd7-0e3d-4de6-90b5-78d0a90a9853.png">
-<img width="392" alt="Screen Shot 2023-02-01 at 2 40 14 PM" src="https://user-images.githubusercontent.com/32469657/216180419-8fefbe70-863e-4a81-ab37-d24a580ea977.png">
-<img width="388" alt="image" src="https://user-images.githubusercontent.com/32469657/216192235-2f9a6f95-581e-430d-b20b-afdb5e3d61c9.png">
-
-## Bonus features completed
-
-- ✅ Allow the user to flag restaurants as a favorite
-- ✅ Allow the user to move the map and requery restaurants endpoint based on new location
+<img width="2557" alt="Screen Shot 2023-02-15 at 11 53 10 AM" src="https://user-images.githubusercontent.com/32469657/219138584-56c645d2-9019-4e8e-86e3-45b3f96cb541.png">
+<img width="2556" alt="Screen Shot 2023-02-15 at 11 53 27 AM" src="https://user-images.githubusercontent.com/32469657/219138616-4ebba448-1689-49ce-8e10-f7c1a339b4aa.png">
+<img width="390" alt="Screen Shot 2023-02-15 at 11 53 35 AM" src="https://user-images.githubusercontent.com/32469657/219138623-f46e7223-3b4b-43e3-b7e9-dfb9ecada71c.png">
+<img width="391" alt="Screen Shot 2023-02-15 at 11 54 13 AM" src="https://user-images.githubusercontent.com/32469657/219138625-c9ac0881-4d6b-4dde-8377-def6aeb060bd.png">
+<img width="390" alt="Screen Shot 2023-02-15 at 11 54 29 AM" src="https://user-images.githubusercontent.com/32469657/219138629-637ba04c-5b47-423f-9bb9-3164b14dcb12.png">

@@ -1,4 +1,4 @@
-# AllTrails Restaurant Discovery Frontend
+# Restaurant Discovery Frontend
 
 ## Running the project locally
 

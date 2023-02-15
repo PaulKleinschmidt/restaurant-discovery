@@ -1,4 +1,4 @@
-# AllTrails Restaurant Discovery Code Challenge API
+# Restaurant Discovery API
 
 A Rails API for exposing the Google Places API to the client.
 
