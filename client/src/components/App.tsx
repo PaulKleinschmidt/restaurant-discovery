@@ -45,10 +45,8 @@ function App() {
   const [mobileView, setMobileView] = useState<MobileView>(MobileView.List);
   const [searchArea, setSearchArea] = useState('');
 
-  const onSearch = async () => {
-    await searchRestaurants(searchTerm, searchArea)
-      .then(setRestaurants)
-      .catch(setError);
+  const onSearch = async (term: string, area: string) => {
+    await searchRestaurants(term, area).then(setRestaurants).catch(setError);
 
     setLoadingState({
       searchTerm: false,
@@ -58,9 +56,7 @@ function App() {
   };
 
   useEffect(() => {
-    onSearch();
-    // Disabling eslint check to ensure this useEffect runs on initial mount only
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    onSearch('', '');
   }, []);
 
   useEffect(() => {
@@ -97,7 +93,7 @@ function App() {
                 ...prevState,
                 searchTerm: true,
               }));
-              onSearch();
+              onSearch(searchTerm, searchArea);
             }}
           />
           {restaurants && (
@@ -134,7 +130,7 @@ function App() {
                       ...prevState,
                       searchLocation: true,
                     }));
-                    onSearch();
+                    onSearch(searchTerm, searchArea);
                   }}
                   loadingState={loadingState}
                   restaurants={restaurants}
